@@ -1,0 +1,13 @@
+\section{Context-Sensitive Optimization}
+\label{sec:optimization}
+
+As was shown in the previous section, the OctoMap generation node plays a crucial role in performance and energy consumption of drones.
+This node is used for modeling of various environment without prior assumptions. In order to do so, the map of the environment is maintained in an efficient tree-like data structure while keeping track of free, occupied and unknown areas. Both planning and collision avoidance kernels utilize this data structure to make safe flights possible by only allowing the drone to navigate through free spaces.  
+
+size of the voxels, i.e. the map's resolution, trades off accuracy and flight-time/energy. By lowering the resolution, i.e. increasing voxel sizes, obstacle boundaries get inflated, hence drones perception of the environment and the objects within it becomes inaccurate. However, doing so improves the performance of the OctoMap generation node and eventually leads to a faster flight time.  As figure blah shows blahx speed up in the update rate of OctoMap is achievable for a sacrifice of blahx in resolution. 
+
+To study the effect of this knob on our applications we conducted a study where the drone will conduct some part of its mission in less dense environment such as outdoors and part of it in more dense environment such as indoors. We 
+
+
+
+the  the flight time and the energy consumption of the drone. This node is responsible for providing the 

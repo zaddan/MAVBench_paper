@@ -1,0 +1,36 @@
+   \section{misc}
+   
+   \textbf{high lighting our benchmark:}  
+   \begin{itemize}
+   \item Our first version of MAVBench includes applications from different yet popular Micro Aerial Vehicle’s use cases although this benchmark is not inclusive to all that's out there. 
+   
+   \item we expect our benchmark to evolove with the help of both communities
+   \item though MAV has been a hot topic within the robotic domain for a while and has gained attraction, there has been a lack of attention from the system/architecture domain
+   
+   
+   \end{itemize}
+   
+   \textbf{highlighting our simulation platform}
+   \begin{itemize}
+   \item talk about the crash based and how we win.
+   \end{itemize}
+   
+   we should highlight that besides benefits such as cost that is usually the reason behind simulation for systems, safety and reproducibility possibiities provided by simulation is of high importance for aerial agents
+   
+   in defense of ROS(http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6213236) 
+   
+    //talk about nodelets and the difference they make 
+   //talk about gps denied environments
+   
+   weakpoints of ROS(singl point of failure ie. roscore and not secure) http://www.theconstructsim.com/start-self-driving-cars-using-ros/
+  
+  
+  random thoughts: leads focus (and optimization) of wrong kernels. we have been talking about detection as an example. Remind me to talk to you about localization as well). Note that if we encounter recurring kernels as bottlenecks, we can motivate for design of system with a specialized accelerator capable running multiple applications ,  where as if we see different bottlenecks, we can motivate for design of systems, each of which is good at a specific application
+    
+    todo:A picture for each applications:
+High level pipeline
+Think about micro benchmarking (e.g. the effect of intelligence on the energy)
+. 
+\red{misc: talk about unpredicated events (Taken care in motion controllers). Perception: information about the environment state (e.g object localizations, ...) and the drone itself.}
+
+Tight constraints: their form factor places tight constraints on the amount of possible energy on board (figure blah). Such energy constraints limits the flight time demanding (figure blah) fast and intelligent decision making withing such a limited flight time.

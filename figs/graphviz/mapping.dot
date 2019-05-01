@@ -1,0 +1,49 @@
+digraph mapping {
+    rankdir=LR;
+    graph [nodesep="0.15"]
+
+        subgraph cluster_0{
+                graph[style=dotted,fontcolor=blue,fontsize=18]
+                {rank=same;"Publish Images","Publish IMU"}
+            {rank=same; "Publish GPS"[style=dashed]}
+            label="AirSim Interface"
+
+        }
+
+    subgraph cluster_1{
+            graph[style=dotted,fontcolor=blue,fontsize=18]
+            {rank=same;"Point Cloud Generation","Octomap Generation", "Collision Check"}
+        {rank=same; "SLAM"[style=dashed]}
+        label="Perception"
+            "SLAM"-> "Octomap Generation"[label="Pose",style=dashed]
+            "SLAM" -> "Collision Check"[label="Pose",style=dashed]
+            "Publish GPS" -> "Collision Check"[label="Position",style=dashed]
+            "Publish GPS" -> "Octomap Generation"[label="Position",style=dashed]
+    }
+
+    subgraph cluster_2{
+            graph[style=dotted,fontcolor=blue,fontsize=18]
+            {rank=same;"Motion Planner:Frontier Exploration","Mission Planner:Mapping"}
+        label="Planning"
+    }
+
+    subgraph cluster_3{
+            graph[style=dotted,fontcolor=blue,fontsize=18]
+            {rank=same;"Path Tracking/Command Issue"}
+        label="Control"
+
+    }
+    "Publish Images" -> "Point Cloud Generation"[label="Image Depth"]
+        "Publish Images" -> "SLAM"[label="Image Raw",style=dashed]
+        "Publish IMU" -> "SLAM"[label="Publish IMU",style=dashed]
+
+
+        "Octomap Generation" -> "Collision Check"[label="Octomap"]
+        "Octomap Generation" -> "Motion Planner:Frontier Exploration"[label="Octomap"]
+        "Point Cloud Generation" -> "Octomap Generation"[label="Point Cloud"]
+        "Motion Planner:Frontier Exploration" -> "Collision Check"[label="MultiDoftraj"]
+        "Motion Planner:Frontier Exploration" -> "Mission Planner:Mapping"[label="Trajectory                  ",dir=both,style=dashed,color=red]
+        "Mission Planner:Mapping"-> "Path Tracking/Command Issue"[label="MultiDoftraj"]
+        "Collision Check" -> "Path Tracking/Command Issue"[label="Collision Detected"]
+//"Collision Check" -> "Mission Planner:Mapping"[label="Collision Detected"]
+}

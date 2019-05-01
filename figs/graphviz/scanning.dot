@@ -1,0 +1,26 @@
+digraph scanning {
+    rankdir=LR;
+    size="14,10"
+        graph [style=dotted,nodesep="0.1"]
+        subgraph cluster_0 {
+            {rank=same; "Publish IMU","Publish GPS"}
+            node [style=filled,]	
+                label="AirSim Interface"
+                graph[fontcolor=blue,fontsize=18]
+        }
+    subgraph cluster_1{
+        {rank=same; "Mission Planner:Scanning" ,"Motion Planner:Lawn Mower"}
+        node [style=filled]
+            "Mission Planner:Scanning" -> "Motion Planner:Lawn Mower"[dir=both,style=dashed,color=red,label="Trajectory           "];
+        label="Planning"
+            graph[fontcolor=blue,fontsize=18]
+    }
+    subgraph cluster_2{
+        "Mission Planner:Scanning" -> "Path Tracking/Command Issue"[label="MultiDoftraj"];
+        label="Control"
+            graph[fontcolor=blue,fontsize=18]
+
+    }
+    "Publish IMU" -> "Mission Planner:Scanning"[label="IMU"];
+    "Publish GPS" -> "Mission Planner:Scanning"[label="Position"];
+}

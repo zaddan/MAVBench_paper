@@ -1,0 +1,43 @@
+digraph aerial_photography {
+    rankdir=LR;
+    size="14,10"
+        graph [style=dotted,nodesep="0.1"]
+        subgraph cluster_0 {
+            {rank=same; "Publish Images"}
+            node [style=filled]	
+                label="AirSim Interface"
+                graph[fontcolor=blue,fontsize=18]
+        }
+    subgraph cluster_1{
+        graph [style=dotted,nodesep="0.1"]
+        {rank=same; "Object Detection" ,"Track Buffered","Track Real Time"}
+        node [style=filled]
+            label="Perception"
+            graph[fontcolor=blue,fontsize=18]
+
+            "Object Detection" -> "Track Buffered"[label="                            Point Cloud"]
+            "Track Buffered" -> "Track Real Time"[label="                                Bounding Box"]
+    }
+    subgraph cluster_2{
+        graph [style=dotted,nodesep="0.1"]
+        {rank=same; "Mission Control:Aerial Photography", "PID"}
+        label="Planning"
+            graph[fontcolor=blue,fontsize=18]
+
+    }
+    subgraph cluster_3{
+        graph [style=dotted,nodesep="0.1"]
+        "PID" -> "Path Tracking/Command Issue"[label="MultoDoftraj"];
+        label="Control"
+            graph[fontcolor=blue,fontsize=18]
+
+    }
+    "Publish Images" -> "Object Detection"[label="Image Raw"];
+    "Publish Images" -> "Track Buffered"[label="Image Raw"];
+    "Publish Images" -> "Track Real Time"[label="Image Raw"];
+
+    "Track Real Time"->"PID" [label="Bounding Box"]
+        "Object Detection"-> "Mission Control:Aerial Photography"[dir=both,style=dashed,color=red,label="Bounding Box"]
+        "Track Buffered"-> "Mission Control:Aerial Photography"[dir=both,style=dashed,color=red,label="Bounding Box"]
+
+}

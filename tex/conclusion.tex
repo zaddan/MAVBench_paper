@@ -1,0 +1,23 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+% MAVs have seen an outburst of attention recently, specifically in the area with a demand for autonomy. Despite their ample use cases, e.g. package delivery, and high constraints, e.g. power and performance, these systems have seen a modest examination from the software and hardware architects. 
+
+MAVBench is a tool including a closed-loop simulation platform and a benchmark suite to probe and understand the intra-system (application data flow) and inter-system (system and environment) interactions of MAVs. This enables us to pinpoint bottlenecks and identify opportunities for hardware and software co-design and optimization. Using our setup and benchmark suite, we uncover a hidden compute to total system energy relationship where faster computers can allow drones to finish missions quickly, and hence save energy. This is because most of the drone's energy is consumed by the rotors, hence, faster compute can cut down on mission time (by increasing the max velocity and reducing the hovering time) and energy accordingly. Our insight allows us to improve MAV's battery consumption by up to 1.8X
+%life by up to 43\% 
+for our OctoMap case study. 
+
+\section*{Acknowledgements}
+
+This material is based upon work supported by the NSF under Grant No. 1528045 and funding from Intel and Google.
+
+
+\begin{comment}
+On large drones, power goes mainly to motors, no matter how performant a processor is used. On smaller drones, the power consumed by processors becomes much more significant.
+
+Faster computers can allow drones to finish missions faster, saving energy.
+
+Such-and-such applications perform best with computers with such-and-such architectures. For example, such-and-such applications require faster parallel computers, while other applications depend upon fast serial performance.
+
+We introduce a benchmark suite that can be used to test drone performance.
+\end{comment}

@@ -1,0 +1,57 @@
+digraph package_delivery{
+	rankdir=LR;
+	#size="14,10"
+	graph [nodesep="0.15"]	
+
+
+	subgraph cluster0{
+	{rank=same;"Publish Images","Publish IMU"}
+	{rank=same;"Publish GPS"[style=dashed]}
+	node [style=dashed]
+	label="Sensor"
+	color=white
+	graph[fontcolor=blue,fontsize=18]
+
+	}
+
+	subgraph cluster1{
+	{rank=same;"Point Cloud Generator","Octomap Server", "Collision Check"}
+	{rank=same;"SLAM"[style=dashed]}
+	node [style=dashed,width=0.3]
+	label="Perception"
+	graph[fontcolor=blue,fontsize=18]
+	color=white
+	"SLAM"-> "Octomap Server"[label="Pose",style=dashed]
+	"SLAM" -> "Collision Check"[label="Pose",style=dashed]
+	"Publish GPS" -> "Collision Check"[label="Position",style=dashed]
+	"Publish GPS" -> "Octomap Server"[label="Position",style=dashed]
+	}
+	subgraph cluster2{
+	{rank=same;"Motion Planner:Shortest Path + Smoothening","Mission Planner:Mapping"}
+	node [style=filled]
+	label="Planning"
+	graph[fontcolor=blue,fontsize=18]
+	color=white
+
+	}
+	subgraph cluster3{
+	{rank=same;"Path Tracking/Command Issue"}
+	node [style=filled]
+	label="Control"
+	graph[fontcolor=blue,fontsize=18]
+	color=white
+	}
+	"Publish Images" -> "Point Cloud Generator"[label="Image Depth"]
+	"Publish Images" -> "SLAM"[label="Image Raw",style=dashed]
+	"Publish IMU" -> "SLAM"[label="Publish IMU",style=dashed]
+	
+	
+	"Octomap Server" -> "Collision Check"[label="Octomap"]
+	"Octomap Server" -> "Motion Planner:Shortest Path + Smoothening"[label="Octomap"]
+	"Point Cloud Generator" -> "Octomap Server"[label="Point Cloud"]
+	"Motion Planner:Shortest Path + Smoothening" -> "Collision Check"[label="MultiDoftraj"]
+	"Motion Planner:Shortest Path + Smoothening" -> "Mission Planner:Mapping"[label="Trajectory                  ",dir=both,style=dashed,color=red]
+	"Mission Planner:Mapping"-> "Path Tracking/Command Issue"[label="MultiDoftraj"]
+	"Collision Check" -> "Mission Planner:Mapping"[label="Collision Detected"]
+
+}

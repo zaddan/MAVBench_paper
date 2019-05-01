@@ -1,0 +1,227 @@
+\documentclass[conference]{IEEEtran}
+
+\PassOptionsToPackage{bookmarks={false}}{hyperref}
+\pagenumbering{gobble}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{cite}
+\usepackage{siunitx}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{../pdf/}{../jpeg/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\interdisplaylinepenalty=2500
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{floatrow}
+\usepackage{fixltx2e}
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{times}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{subfiles}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{cite}
+\usepackage{export}
+%\usepackage[...]{hyperref}
+\usepackage{nameref}
+\usepackage{zref-xr}
+\usepackage{adjustbox}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage{mathtools}
+\usepackage{esvect}
+\usepackage{layouts}
+\usepackage{xspace}	
+\usepackage{siunitx}
+\usepackage{floatrow}
+\usepackage{soul}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{etoolbox}
+\usepackage[font=small,skip=0pt]{caption}
+\usepackage{authblk}
+
+\makeatletter
+\patchcmd{\@classz}
+  {\CT@row@color}
+  {\oldCT@column@color}
+  {}
+  {}
+\patchcmd{\@classz}
+  {\CT@column@color}
+  {\CT@row@color}
+  {}
+  {}
+\patchcmd{\@classz}
+  {\oldCT@column@color}
+  {\CT@column@color}
+  {}
+  {}
+\makeatother
+
+% \setlength{\belowcaptionskip}{-5pt}
+% \setlength{\abovecaptionskip}{-5pt}
+\usepackage{setspace}
+%\usepackage{titling}
+%\thanksmarkseries{fnsymbol}
+\zxrsetup{toltxlabel}
+\zexternaldocument*{appendix}
+\pagestyle{plain}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\renewcommand{\baselinestretch}{.96}
+\definecolor{fxnote}{rgb}{0.8000,0.0000,0.0000}
+
+\renewcommand{\paragraph}[1]{\textbf{#1}}
+
+\newcommand{\bench}[1]{\textit{#1}}
+\newcommand{\solo}[0]{3DR~Solo\xspace}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\Sec}[1]{Section~\ref{#1}}
+\newcommand{\Fig}[1]{Figure~\ref{#1}}
+\newcommand{\Tbl}[1]{Table~\ref{#1}}
+
+
+\IEEEoverridecommandlockouts
+\date{}
+\title{MAVKit: A Platform for Hardware-in-the-Loop Micro-Aerial Vehicle (MAV) Benchmarking}
+
+\title{MAVKit: A Closed Loop Hardware and Software Platform for Micro-Aerial Vehicle Benchmarking}
+
+\title{The Role of Compute in Aerial Agents:\\Using a Closed Loop Hardware and Software Platform for Micro-Aerial Vehicle Benchmarking}
+
+\title{MAVBench: Micro Aerial Vehicle Benchmarking}
+
+\begin{comment}
+\author{
+  Srivatsan Krishnan\\
+  Department of Electrical and Computer Engineering\\
+  The University of Texas at Austin 
+  United States\\
+  \texttt{srivatsan.krishnan@utexas.edu} \\
+   \And
+  Behzad Boroujerdian \\
+  Department of Electrical and Computer Engineering\\
+  The University of Texas at Austin \\
+  \texttt{behzadboro@gmail.com} \\
+  \And
+  Hasan Genc \\
+  Department of Electrical and Computer Engineering \\
+  The University of Texas at Austin \\
+  \texttt{hngenc@utexas.edu} \\
+  \And
+  Aleksandra Faust \\
+  Google Brain \\
+  Mountain View, California \\
+  \texttt{sandrafaust@google.com} \\
+  \And
+  Vijay Janapa Reddi \\
+  Department of Electrical and Computer Engineering \\
+  The University of Texas at Austin \\
+  \texttt{vj@ece.utexas.edu} \\
+}
+\end{comment}
+
+
+\author[$\dagger$]{Behzad Boroujerdian*\thanks{* These two authors contributed equally.}}
+\author[$\dagger$]{Hasan Genc*}
+\author[$\dagger$]{Srivatsan Krishnan}
+\author[$\dagger$]{Wenzhi Cui}
+\author[$\mp$]{Aleksandra Faust}
+\author[$\dagger\ddagger\S$]{Vijay Janapa Reddi}
+\affil[ ]{\texttt{\url{https://github.com/harvard-edge/MAVBench/tree/master/src}}}
+\affil[ ]{ }
+
+\affil[$\dagger$]{The University of Texas at Austin}
+\affil[$\ddagger$]{Harvard University}
+\affil[$\mp$]{Google Brain}
+\affil[$\S$]{Google}
+
+\renewcommand*{\Authsep}{   }
+\renewcommand*{\Authand}{  }
+\renewcommand*{\Authands}{  }
+\renewcommand*{\Affilfont}{\normalsize}
+\setlength{\affilsep}{1.5em}   % set the space between author and affiliation
+\begin{document}
+\begin{comment}
+\author{Behzad Boroujerdian \\ Elect/Comp Eng \\UT Austin \\Austin, USA \\
+behzadboro@gmail.com
+\and Hasan Genc \\ Elect/Comp Eng\\ UC Berkeley \\ Berkeley, USA\\ hngenc@berkeley.edu
+\and Srivatsan Krishnan\\ Elect/Comp Eng\\KIT\\ Austin, Germany\\srivatsan.krishnan@utexas.edu
+\and
+Wenzhi Cui\\Elect/Comp Eng \\
+UT Austin\\ blah,blah\\
+blah@google.edu
+\\
+\and
+Aleksandra Faust\\ blah, blah \\Google Inc\\ blah, blah\\sandrafaust@google.com
+\and Vijay Janapa Reddi
+\\blah, blah \\ blah, blah\\blah blah\\reddi@google.com
+}
+\end{comment}
+
+\begin{comment}
+\author{
+  Behzad Boroujerdian$^{\dagger}$ \\
+  \texttt{behzadboro@gmail.com} \\
+  \and
+  Hasan Genc$^{\dagger}$ \\
+  \texttt{hngenc@utexas.edu} \\
+  \and
+   Srivatsan Krishnan$^{\dagger}$\\
+  \texttt{srivatsan.krishnan@utexas.edu}
+  \and
+   Wenzhi Cui$^{\dagger}$ \\
+  \texttt{wcui@google.com} \\
+  \and
+  Aleksandra Faust$^{\ddagger}$ \\
+  \texttt{sandrafaust@google.com} \\
+  \and
+  Vijay Janapa Reddi$^{\dagger}$$^{\ddagger}$ \\
+  \texttt{vjreddi@g.harvard.edu} \\
+  The University of Texas at Austin Google Harvard University
+}
+\end{comment}
+
+
+
+\maketitle
+
+\thispagestyle{empty}
+
+
+
+
+\input{tex/abstract}
+\input{tex/intro}
+\input{tex/background}
+\input{tex/simulator}
+\input{tex/MavBench}
+\input{tex/characterization}
+\input{tex/case_studies}
+%\input{tex/optimization}
+\input{tex/related}
+\input{tex/conclusion}
+%\input{tex/diff}
+
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+
+
+
+\end{document}

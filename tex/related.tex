@@ -1,0 +1,34 @@
+\section{Related Work}
+\label{sec:related}
+
+There is prior work that focuses on building simulators and benchmark suites to aid the development of autonomous MAVs. We address some shortcomings of previous approaches by providing a more integrated, end-to-end solution.
+
+\paragraph{Simulators} Simulators are essential to the study of aerial and robotic agents. Our simulation platform is built upon Microsoft's AirSim~\cite{Airsim_paper}, a UAV simulator that uses the Unreal Game Engine to provide accurate physics models and photo-realistic environments. MAVBench uses the AirSim core and extends it with performance, power and battery models that are suited for architectural research, as well as with a gimbal, and dynamic and static obstacle creation capabilities that are not inherently part of AirSim. Another very popular simulator used in the robotics community for MAVs is Gazebo~\cite{gazebo}. However, Gazebo simulations lack photo-realism, while our work, with the help of AirSim and the Unreal Game Engine, enables more accurate visual modeling.
+
+There are also numerous simulators widely used in industry and academia for studying autonomous agents such as ~\cite{boss-cmu,talos-mit,odin-vtech,uber-simulator, uav_benchmark_simulator}. However, they either do not provide MAV models or does not consider the architectural insights.
+
+%For instance, one such simulator, CARLA~\cite{carla} also uses the Unreal engine for photo-realistic representations of the environment. However, CARLA lacks models for MAVs, rotor dynamics and their interaction with the environment. For MAVs, there has been prior work~\cite{uav_benchmark_simulator} using simulators built on the Unreal game engine. However unlike ours, their work mainly focuses on object tracking and does not go into the evaluation of the hardware platform and system architecture. 
+
+A recent work FlightGoggles~\cite{flight-goggles}, creates virtual reality environments for drones using the images streamed from the Unity3D game engine. However, for maximum realism, FlightGoggles requires a fully functioning drone that must fly during tests, with its sensory data being streamed in from the game engine. MAVBench, on the other hand, does not have this constraint. Our users may provide real processors for hardware-in-the-loop simulation, but they are not required to fly the MAVs physically in the real world.
+
+\paragraph{Benchmarks} Most robot benchmark suites target individual computational kernels, such as odometry or motion-planning, rather than characterizing end-to-end applications composed of many different kernels. For example SLAMBench~\cite{slambench} and CommonRoad~\cite{common-road} solely focus on the perception and the planning stage respectively. However, our benchmarks allows for holistic studies by providing end-to-end applications. 
+%For example, there are numerous robotic vision datasets, such as KITTI~\cite{kitti}, and the EuRoC~\cite{euroc} MAV dataset, but these focus exclusively on the perception stage of a robot's computational pipeline. Others such as SLAMBench~\cite{slambench} and CommonRoad~\cite{common-road} lack 
+%a software framework that characterizes the accuracy, performance, and energy consumption of RGB-D SLAM algorithms, and goes far deeper into its analysis of the SLAM computational kernel than we do in MAVBench. However, these tools do not provide insights into how SLAM interacts with other kernels in an end-to-end application. CommonRoad~\cite{common-road} is another benchmarking tool that characterizes motion-planning algorithms for autonomous cars, but computational kernels such as mapping and localization, that are necessary for an end-to-end characterization, are outside its scope.
+
+\renewcommand*{\arraystretch}{1.2}
+\begin{table}[t!]
+\vspace{10pt}
+\caption{Impact of introducing depth image noise into the RGBD camera system on the drone's performance. Introducing noise into the drone's visual subsystem results in more frequent (re-)planning, which increases mission time and can also result in mission failures.}
+\label{tbl:noise-data}
+\resizebox{1.0\columnwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Noise Std {(m)}} & \textbf{Failure Rate {(\%)}} & \textbf{Number of Re-plans} & \textbf{Mission Time {(s)}} \\ \hline
+\rowcolor{red!10}0.0             & 0                 & 2                  & 72               \\ \hline
+\rowcolor{red!25}0.5            & 0                 & 3                  & 82               \\ \hline
+\rowcolor{red!50}1.0             & 0                 & 4                  & 95               \\ \hline
+\rowcolor{red!100}1.5           & 10                & 8                  & 137              \\ \hline
+\end{tabular}
+}
+\end{table}
+\renewcommand*{\arraystretch}{1}

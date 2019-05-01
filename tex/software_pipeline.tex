@@ -1,0 +1,11 @@
+High-level software pipeline associated with our (though not exclusive to it) workloads are shown in figure blah. 
+
+\textbf{perception stage:}
+Perception is defined as "the task- oriented interpretation of sensor data" ~\cite{Handbook_robotic}. Inputs to this stage, the sensory data (e.g. GPS) and a partial model of the environment (voxel map), are fused to develop a more elaborate model (e.g. improved voxel map) in order to extract the drone's and environment's relevant states (e.g. position of obstacles around the drone). 
+
+\textbf{Planning:}
+Using the inputs (e.g. voxel map) from the perception stage, the next two steps (namely planning and control) provide a motion generation framework \footnote{Our benchmark suit solely focuses on motion planning}. Planning involves generating (usually) a \textit{collision-free} to a target. In a nutshell, this step involves first generating a set of possible paths to the target (e.g. PRM) and then choosing an optimal one among them using a a path-planning algorithm (e.g. A*). 
+
+
+\textbf{Control:}
+This stage is about achieving a desired path (provided from the previous stage) while providing a set of guarantees such as feasibility, stability and robustness~\cite{tech_problem}. In this stage, drones dynamics are considered and flight commands are generated while ensuring the aforementioned guarantees.  
